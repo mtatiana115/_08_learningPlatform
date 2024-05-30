@@ -16,7 +16,9 @@ import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @Entity(name = "lesson")
@@ -40,7 +42,9 @@ public class Lesson {
     referencedColumnName = "id"
   )
   private Course course;
-
+  
+  @ToString.Exclude
+  @EqualsAndHashCode.Exclude
   @OneToMany(mappedBy = "lesson",
   fetch = FetchType.LAZY,
   cascade = CascadeType.ALL,

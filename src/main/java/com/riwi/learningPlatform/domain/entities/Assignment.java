@@ -17,7 +17,9 @@ import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @Entity(name = "assignment")
@@ -45,6 +47,8 @@ public class Assignment {
   )
   private Lesson lesson;
 
+  @ToString.Exclude
+  @EqualsAndHashCode.Exclude
   @OneToMany(mappedBy = "assignment",
   fetch = FetchType.LAZY,
   cascade = CascadeType.ALL,
