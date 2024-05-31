@@ -2,6 +2,8 @@ package com.riwi.learningPlatform.infrastructure.abstract_services;
 
 import org.springframework.data.domain.Page;
 
+import com.riwi.learningPlatform.util.enums.SortType;
+
 public interface CrudService <RQ,RS,ID> {
 
   public RS create(RQ request);
@@ -12,5 +14,5 @@ public interface CrudService <RQ,RS,ID> {
 
   public void delete(ID id);
 
-  public Page<RS> getAll(int page, int size);
+  public Page<RS> getAll(int page, int size, SortType sortType);
 }
