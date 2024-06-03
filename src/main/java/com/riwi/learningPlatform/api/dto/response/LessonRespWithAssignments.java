@@ -1,6 +1,6 @@
 package com.riwi.learningPlatform.api.dto.response;
 
-import java.time.LocalDate;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,18 +8,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class MessageResp {
+@Builder
+public class LessonRespWithAssignments {
 
   private Long id;
+  private String lessonTitle;
+  private String content;
+  private List<AssignmentResp> assignments;
 
-  private String messageContent;
-  
-  private LocalDate sentDate;
-
-  private UserResp sender;
-  
-  private UserResp receiver;
 }

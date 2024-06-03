@@ -2,6 +2,7 @@ package com.riwi.learningPlatform.api.controllers;
 
 import java.util.Objects;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -17,11 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.riwi.learningPlatform.api.dto.errors.ErrorsResp;
-import com.riwi.learningPlatform.api.dto.request.UserReq;
-import com.riwi.learningPlatform.api.dto.response.UserResp;
-import com.riwi.learningPlatform.api.dto.response.UserRespWithCourses;
-import com.riwi.learningPlatform.api.dto.response.UserRespWithSubmissions;
-import com.riwi.learningPlatform.infrastructure.abstract_services.IUserService;
+import com.riwi.learningPlatform.api.dto.request.AssignmentReq;
+import com.riwi.learningPlatform.api.dto.response.AssignmentResp;
+import com.riwi.learningPlatform.api.dto.response.AssignmentRespWithSubmissions;
+import com.riwi.learningPlatform.infrastructure.abstract_services.IAssignmentService;
 import com.riwi.learningPlatform.util.enums.SortType;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -31,15 +31,16 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping(path = "/user")
+@RequestMapping(path = "/assignment")
 @AllArgsConstructor
-public class UserController {
+public class AssignmentController {
 
-  private final IUserService iUserService;
+  @Autowired
+  private final IAssignmentService iAssignmentService;
 
-  @Operation(summary = "Get the entire users list in a paginated manner")
+  @Operation(summary = "Get the entire assigments list in a paginated manner")
   @GetMapping
-  public ResponseEntity<Page<UserResp>> getAll(
+  public ResponseEntity<Page<AssignmentResp>> getAll(
     @RequestParam(defaultValue = "1") int page,
     @RequestParam(defaultValue = "5") int size,
     @RequestHeader(required = false) SortType sortType
@@ -47,70 +48,61 @@ public class UserController {
     if (Objects.isNull(sortType)) {
       sortType = sortType.NONE;
     }
-    return ResponseEntity.ok(this.iUserService.getAll(page -1, size, sortType));
+    return ResponseEntity.ok(this.iAssignmentService.getAll(page -1, size, sortType));
   }
 
-  @Operation(summary = "Create an user")
+  @Operation(summary = "Create an assignment")
   @ApiResponse(responseCode = "400", description = "When the request is not valid", content = {
       @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorsResp.class))
   })
   @PostMapping
-  public ResponseEntity <UserResp> create (
-    @Validated @RequestBody UserReq request
+  public ResponseEntity <AssignmentResp> create (
+    @Validated @RequestBody AssignmentReq request
   ){
-    return ResponseEntity.ok(iUserService.create(request));
+    return ResponseEntity.ok(iAssignmentService.create(request));
   }
 
-  @Operation(summary = "Get an user by its ID number")
+  @Operation(summary = "Get an assignment by its ID number")
   @ApiResponse(responseCode = "400", description = "When the ID is not found", content = {
       @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorsResp.class))
   })
   @GetMapping(path = "/{id}")
-  public ResponseEntity<UserResp> get(
+  public ResponseEntity<AssignmentResp> get(
     @PathVariable Long id
   ){
-    return ResponseEntity.ok(this.iUserService.get(id));
+    return ResponseEntity.ok(this.iAssignmentService.get(id));
   }
 
-  @Operation(summary = "Delete an user by its ID number")
+  @Operation(summary = "Delete an assignment by its ID number")
   @ApiResponse(responseCode = "204", description = "User deleted successfully")
   @ApiResponse(responseCode = "400", description = "When the ID is not found", content = {
       @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorsResp.class))
   })
   @DeleteMapping(path = "/{id}")
   public ResponseEntity<Void> delete(@PathVariable Long id){
-    this.iUserService.delete(id);
+    this.iAssignmentService.delete(id);
     return ResponseEntity.noContent().build();
   }
 
-  @Operation(summary = "Update an user by its ID number")
+  @Operation(summary = "Update an assignment by its ID number")
   @ApiResponse(responseCode = "400", description = "When the request is not valid", content = {
       @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorsResp.class))
   })
   @PutMapping(path = "/{id}")
-  public ResponseEntity<UserResp> update(
+  public ResponseEntity<AssignmentResp> update(
     @PathVariable Long id,
-    @Validated @RequestBody UserReq request
+    @Validated @RequestBody AssignmentReq request
   ){
-    return ResponseEntity.ok(this.iUserService.update(request, id));
+    return ResponseEntity.ok(this.iAssignmentService.update(request, id));
   }
 
-  @Operation(summary = "Get an user with courses by its ID number")
+  @Operation(summary = "Get an activity with submissions by its ID number")
   @ApiResponse(responseCode = "400", description = "When the ID is not found", content = {
-      @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorsResp.class))
-  })
-  @GetMapping("/{id}/courses")
-  public ResponseEntity<UserRespWithCourses> getByIdWithCourses(@PathVariable Long id) {
-    return ResponseEntity.ok(iUserService.getUsersWithCourses(id));
-  }
-
-  @Operation(summary = "Get an user with submissions by its ID number")
-  @ApiResponse(responseCode = "400", description = "When the ID is not found", content = {
-      @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorsResp.class))
+          @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorsResp.class))
   })
   @GetMapping("/{id}/submissions")
-  public ResponseEntity<UserRespWithSubmissions> getByIdWithSubmisions(@PathVariable Long id) {
-    return ResponseEntity.ok(iUserService.getUserWithSubmissions(id));
+  public ResponseEntity<AssignmentRespWithSubmissions> getByIdWithSubmissions(@PathVariable Long id) {
+      return ResponseEntity.ok(iAssignmentService.getActivityWithSubmissions(id));
   }
 
 }

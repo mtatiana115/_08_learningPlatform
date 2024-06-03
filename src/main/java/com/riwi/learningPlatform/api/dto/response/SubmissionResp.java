@@ -2,8 +2,6 @@ package com.riwi.learningPlatform.api.dto.response;
 
 import java.time.LocalDate;
 
-import com.riwi.learningPlatform.domain.entities.Submission;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

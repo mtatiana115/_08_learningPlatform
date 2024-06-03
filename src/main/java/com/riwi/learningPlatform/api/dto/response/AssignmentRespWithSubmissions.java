@@ -1,6 +1,7 @@
 package com.riwi.learningPlatform.api.dto.response;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,18 +9,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class MessageResp {
+@Builder
+public class AssignmentRespWithSubmissions {
 
   private Long id;
-
-  private String messageContent;
-  
-  private LocalDate sentDate;
-
-  private UserResp sender;
-  
-  private UserResp receiver;
+  private String assignmentTitle;
+  private String description;
+  private LocalDate dueDate;
+  private List<SubmissionResp> submissions;
 }

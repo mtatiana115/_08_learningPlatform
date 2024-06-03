@@ -18,6 +18,6 @@ public class LessonReq {
 
   private String content;
   
-  @NotNull(message = "Id required")
+  @NotNull(message = "Id course required")
   private Long courseId;
 }

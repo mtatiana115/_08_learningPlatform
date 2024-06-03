@@ -16,14 +16,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AssignmentReq {
 
-  @NotBlank(message = "Activity title required.")
-  private String activityTitle;
+  @NotBlank(message = "Assignment title required.")
+  private String assignmentTitle;
 
   private String description;
 
   @FutureOrPresent(message = "The date cannot be in the past.")
   private LocalDate dueDate;
   
-  @NotNull(message = "Id required.")
+  @NotNull(message = "Id  lesson is required.")
   private Long lessonId;
 }

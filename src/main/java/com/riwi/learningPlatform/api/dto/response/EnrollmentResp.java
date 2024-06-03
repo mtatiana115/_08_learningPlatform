@@ -17,4 +17,8 @@ public class EnrollmentResp {
 
   private LocalDate date;
 
+  private CourseResp courseResp;
+
+  private UserResp userResp;
+
 }

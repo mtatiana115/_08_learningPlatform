@@ -3,7 +3,6 @@ package com.riwi.learningPlatform.api.error_handler;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.riwi.learningPlatform.api.dto.errors.BaseErrorResponse;
 import com.riwi.learningPlatform.api.dto.errors.ErrorsResp;
+import com.riwi.learningPlatform.util.exceptions.BadRequestException;
 
 @RestControllerAdvice
 @ResponseStatus(code = HttpStatus.BAD_REQUEST)

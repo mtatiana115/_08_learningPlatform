@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EnrollmentReq {
 
-  @NotNull(message = "Id required")
+  @NotNull(message = "Id student is required")
   private Long studentId;
   
-  @NotNull(message = "Id required")
+  @NotNull(message = "Id course is required")
   private Long courseId;
 }

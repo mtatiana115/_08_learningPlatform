@@ -21,5 +21,5 @@ public class SubmissionReq {
   private Long userId;
   
   @NotNull(message = "Activity id required")
-  private Long activityId;
+  private Long assignmentId;
 }
