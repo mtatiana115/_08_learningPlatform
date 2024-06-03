@@ -95,7 +95,7 @@ public class MessageController {
   }
 
   @Operation(summary = "Get the entire messages list in a paginated manner")
-  @GetMapping
+  @GetMapping("/{userId1}/{userId2}")
   public ResponseEntity<List<MessageResp>> getMessagesBetweenUsers(
           @RequestParam(required = false) Long senderId,
           @RequestParam(required = false) Long receiverId

@@ -10,7 +10,7 @@ import com.riwi.learningPlatform.domain.entities.Submission;
 @Repository
 public interface SubmissionRepository extends JpaRepository <Submission, Long> {
 
-  public List<Submission> findByActivityId(Long id);
+  public List<Submission> findByAssignmentId(Long id);
 
   public List<Submission> findByUserId(Long id);
 }
